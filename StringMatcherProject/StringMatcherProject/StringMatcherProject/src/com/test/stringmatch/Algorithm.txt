@@ -1,0 +1,38 @@
+/*
+Algorithm
+1. Use a Trie for fast lookup of the strings in order to find whether the string is for fixed match or exact match. The hash table would have a 
+structure containing an id implemented as int and the type of match implemented as bool(0=exact match and 1 = prefix match)
+struct val
+{
+int val;
+bool type;
+}
+we store the values like below:
+Key        Value <ID,type>
+contactus <1,0>
+img		  <1,1>
+imghd	  <2,1>
+abc		  <908,0>
+fas       <907,1>
+
+2. For each incoming input string coming for lookup, traverse the trie to find the match.
+
+Case 1: We reach the data node without exhausting or matching all characters in the input string. In this case we check the type of the data node 
+i.e. type = 0(exact match) or type = 1(prefix match). If the type = 1 we return the ID else we return -1.
+
+Case 2: We reach the data node and all the characters from incoming input string is exhausted then we return the ID without looking at type.
+
+
+By virtue of a trie we always get the longest match in case of prefix match.
+
+
+MyTrie would look something like this.
+
+						<NULL, A , B, C, D, .......I,.... N, O, P,....,Z>
+                                  /    \                         \
+					<A,...U,...O,...>   <A,..,R>                 <..,O,A,,,>
+
+<Black> <Bus> <BOX>						 <CAT> <CAR>                     <POST> <PACK>
+
+For each string match the complexity would be O(l) where l= length of the input string.
+*/
